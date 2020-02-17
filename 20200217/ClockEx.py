@@ -70,7 +70,6 @@ class ClockEx(Clock):
         return '%04d-%02d-%02d' % (self.__year, self.__month, self.__day) + ' ' + (super().__str__())
 
 
-
 if __name__ == '__main__':
     c1 = Clock()  # 用Clock创建对象，实例化的过程
     c2 = Clock(15, 20)
