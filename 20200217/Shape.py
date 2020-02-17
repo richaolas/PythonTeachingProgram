@@ -45,3 +45,8 @@ if __name__ == '__main__':
     shapes.append(Rectangle(6, 9))
     area = Shape.getAllArea(shapes)
     print(area)
+
+# 继承重点内容
+# 1. 把子类看作两部分组成(父类部分，扩展部分）
+# 2. 如何调用父类方法 三种
+# 3. 静态方法的含义 (@staticmethod)
