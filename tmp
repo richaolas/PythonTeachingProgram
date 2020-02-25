@@ -1,45 +1,35 @@
+import random
+
+target = random.randint(0,10)
+print(target)
+
+guessed = False
+
+for i in range(3):
+    num = int(input('Please input number which you guess: '))
+    if num == target:
+        print('you are right')
+        guessed = True
+        break
+    elif num < target:
+        print('your number is less')
+    else:
+        print('your number is greater')
+
+if guessed == True: # if guessed
+    print('succussed')
+else:
+    print('sorry')
+
+
 import turtle
 import random
 
-#1 random.random() [0,1]
-#2 random.randomint(min,max)  [min, max]
-
-turtle.speed(0)
-for i in range(30):
-    turtle.penup()
-    turtle.goto(random.randint(-100, 100), random.randint(-100, 100))
-    turtle.pendown()
-    r,g,b = random.random(), random.random(), random.random()
-    turtle.color((r,g,b),(r,g,b))
+for i in range(3,21):
+    turtle.fillcolor(random.random(),random.random(),random.random())
     turtle.begin_fill()
-    turtle.circle(random.randint(10,50), 360)
+    for n in range(i):
+        turtle.forward(20)
+        turtle.left(360/i)
     turtle.end_fill()
-
-#
-# turtle.pensize(5)
-# turtle.pencolor(0, 0, 1)
-# turtle.circle(50, 360)
-# turtle.right(90)
-# turtle.pensize(5)
-# turtle.pencolor(1,1,0)
-# turtle.circle(50,360)
-# turtle.left(90)
-# turtle.penup()
-# turtle.forward(105)
-# turtle.pendown()
-# turtle.pensize(5)
-# turtle.pencolor(0,0,0)
-# turtle.circle(50,360)
-# turtle.right(90)
-# turtle.pensize(5)
-# turtle.pencolor(0,1,0)
-# turtle.circle(50,360)
-# turtle.left(90)
-# turtle.penup()
-# turtle.forward(105)
-# turtle.pendown()
-# turtle.pensize(5)
-# turtle.pencolor(1,0,0)
-# turtle.circle(50,360)
-
 turtle.done()
