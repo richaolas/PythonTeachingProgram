@@ -1,35 +1,22 @@
-import random
+# 判断一个数字（>2）是不是素数
 
-target = random.randint(0,10)
-print(target)
-
-guessed = False
-
-for i in range(3):
-    num = int(input('Please input number which you guess: '))
-    if num == target:
-        print('you are right')
-        guessed = True
-        break
-    elif num < target:
-        print('your number is less')
-    else:
-        print('your number is greater')
-
-if guessed == True: # if guessed
-    print('succussed')
-else:
-    print('sorry')
+# n = int(input('input number'))
+# flag = True
+# for i in range(2, n):
+#     if n % i == 0:
+#         flag = False
+#         break
+# if flag:
+#     print('Yes')
+# else:
+#     print('NO')
 
 
-import turtle
-import random
+#0-100 所有，不能被3，or 5，or 7整除的数，要求
 
-for i in range(3,21):
-    turtle.fillcolor(random.random(),random.random(),random.random())
-    turtle.begin_fill()
-    for n in range(i):
-        turtle.forward(20)
-        turtle.left(360/i)
-    turtle.end_fill()
-turtle.done()
+for i in range(0,101):
+    if i%3 ==0 or i%5 ==0 or i%7 ==0:
+        continue
+    print(i,end=' ')
+
+
