@@ -1,22 +1,41 @@
-# 判断一个数字（>2）是不是素数
 
-# n = int(input('input number'))
-# flag = True
-# for i in range(2, n):
-#     if n % i == 0:
-#         flag = False
-#         break
-# if flag:
-#     print('Yes')
-# else:
-#     print('NO')
+s1 = 'fdsajfdshgadsa '
+s2 = 'ffdsja fdsghadgshdfsh dfsgha'
+a = len(s1)+len(s2)
+b = len(s1 + s2)
+print(a==b)
+#print(len(s))
+# if 'z' not in s:
+#     print('have not z')
 
 
-#0-100 所有，不能被3，or 5，or 7整除的数，要求
-
-for i in range(0,101):
-    if i%3 ==0 or i%5 ==0 or i%7 ==0:
-        continue
-    print(i,end=' ')
 
 
+
+# a = '''
+# 鹅鹅鹅
+# 去想像天歌
+#       白毛浮绿水
+#
+#          红掌拨清波
+#
+#          ---《咏鹅》'''
+#
+# print(a)
+#
+# # # 100 以内的所有的素数的和
+# #
+# #
+# # sum = 0
+# #
+# # for i in range(2, 101):
+# #     #sum = sum + i
+# #     flag = True
+# #     for n in range(2, i):
+# #         if i % n == 0:
+# #             flag = False
+# #             break
+# #     if flag:
+# #         sum += i
+# #
+# # print(sum)
