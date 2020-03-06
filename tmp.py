@@ -1,76 +1,51 @@
-# 建立一个字典， 里面有3个单词
-# create then print
-
-d={'go':'doh','mao':'cat'}
-d['yu']='fish'
-print(d)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# d = {}
-# print(type(d))
-# d['男孩'] = 'boy'  # (key, value) ('男孩'，boy) d[key] = value
-# d['女孩'] = 'girl'
-# d['老师'] = 'teacher'
-# print(len(d))
+# d={'gao':'tall','ai':'short'}
+# d['pang']='fat'
+# d['shou']='thin'
+# print(d)
 #
-# print(d['老师']) #dict[key]
-#
-# li = [1,2,3,4,5]
-# for item in li:
-#     print(item)
-#
-# for item in d:
-#     print(item, d[item])
+# for key in d:
+#     print('chinese:' + key , 'English:' + d[key])
 
-# s = {}
-# s['age'] = 18
-# s['name'] = '张山'
-# s['id'] = 2020001
-#
-# print(s)
-#
-# li = []
-# li = [1,2,3,4]
-#
-# s = {'age':18, 'name':'张山', 'id':2020001}
-# print(s)
+#1+2+...+20
+
+n = 1
+sum = 0
+while n <= 20:
+    sum = sum + n
+    n = n + 1
+
+print(sum)
 
 
+# d = {'tall': ['高','长','夸大的'],
+#      'short':['矮'],
+#      'fat':  ['胖'],
+#      'thin': ['瘦']}
+
+#print(d)
+#del d['tall']
+
+# n = 10
+# while n > 0:
+#     print(n)
+#     n = n - 1
 
 
 
-# li = []
-# print(type(li))
-# print(len(li)) #length
-# print(li + [1,2,3,]) # 1+ 2
-# print(li)
-#
-#
-# t = ()
-# print(type(t))
-# print(len(t))
-#
-# li = [1]
-# print(type(li))
-#
-# t = (1,)
-# print(type(t))
-#
-# t = (0, 1)
-# t[0] = 2
+#print(d)
 
 
+#counter = 0
+
+while len(d) > 0:
+    for key in d:
+        print('tell me mean of the word: ' + key)
+        chinese = input('input your answer: ')
+        if chinese in d[key]:
+            print('you are right')
+            del d[key]
+            #counter = counter + 1
+        else:
+            print('sorry, your answer is wrong!')
+
+#print(counter)
