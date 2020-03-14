@@ -58,6 +58,7 @@ def playGame(screen, lives, score):
                 if lives == 0:
                     break
             ball_x, ball_y = init_ball()
+            init_ball()
         else:
             ball_y += vel_y
 
