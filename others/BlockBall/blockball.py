@@ -26,7 +26,7 @@ def init_ball():
 
 def playGame(screen, lives, score):
     # ball_x, ball_y = 0, 100
-    # 小挡板的坐标和宽高
+    # 小挡板的坐标和宽高re
     rect_x, rect_y, rect_w, rect_h = (win_w - 120) / 2, win_h - 40, 120, 40
 
     font1 = pygame.font.Font(None, 24)
