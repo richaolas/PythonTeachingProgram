@@ -61,3 +61,57 @@ while True:
     pygame.draw.rect(screen, (0, 0, 255), (rect_x, rect_y, rect_w, rect_h), 0)
     pygame.display.update()
     clock.tick(30)
+
+
+import turtle
+
+w = turtle.window_width()
+h = turtle.window_height()
+turtle.speed(9)
+turtle.bgcolor('skyblue')
+
+turtle.forward(50)
+turtle.right(144)
+turtle.forward(50)
+turtle.right(72)
+turtle.forward(50)
+turtle.right(144)
+turtle.forward(50)
+turtle.right(72)
+turtle.forward(50)
+turtle.right(144)
+turtle.forward(50)
+turtle.right(72)
+turtle.forward(50)
+turtle.right(144)
+turtle.forward(50)
+turtle.right(72)
+turtle.forward(50)
+turtle.right(144)
+turtle.forward(50)
+turtle.right(72)
+
+
+
+turtle.fillcolor('blue')
+turtle.begin_fill()
+turtle.penup()
+turtle.goto(-w/2,0)
+turtle.pendown()
+turtle.forward(w)
+turtle.right(90)
+turtle.forward(h/2)
+turtle.right(90)
+turtle.forward(w)
+turtle.right(90)
+turtle.forward(h/2)
+
+
+turtle.end_fill()
+
+
+
+
+
+
+turtle.done()
