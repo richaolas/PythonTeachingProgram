@@ -476,6 +476,7 @@ width, height = turtle.window_width(), turtle.window_height()
 print(width, height)
 turtle.hideturtle()
 
+
 def arrow(size=10, angle=45):
     heading = turtle.heading()
     turtle.left(180-angle)
