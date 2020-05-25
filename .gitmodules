@@ -1,0 +1,3 @@
+[submodule "PythonFunnyProgram/02. pygame/kidscancode_pygame_tutorials"]
+	path = PythonFunnyProgram/02. pygame/kidscancode_pygame_tutorials
+	url = git@github.com:kidscancode/pygame_tutorials.git
