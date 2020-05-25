@@ -25,5 +25,5 @@
 |pygame.surfarray|	管理点阵图像数据| |
 |pygame.time|	管理时间和帧信息|*|
 |pygame.transform|	缩放和移动图像| |
-
+|pygame.math|	Vector2,Vector3|*|
 
