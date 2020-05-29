@@ -1,3 +1,4 @@
+
 '''
 Objects
 '''
@@ -21,6 +22,7 @@ Main Loop
 # Pygame template - skeleton for a new pygame project
 import pygame
 import random
+import os
 
 WIDTH = 360
 HEIGHT = 480
@@ -40,11 +42,12 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 
-block = pygame.Surface((50, 50))
-block.fill(GREEN)
-block_rect = block.get_rect()
+role = pygame.image.load(os.path.join("res", "arrowRight.png"))#.convert()
+#role.set_colorkey(WHITE)
+role_rect = role.get_rect()
 # center the sprite on the screen
-block_rect.center = (WIDTH / 2, HEIGHT / 2)
+role_rect.center = (WIDTH / 2, HEIGHT / 2)
+
 
 # Game loop
 running = True
@@ -56,15 +59,20 @@ while running:
         # check for closing window
         if event.type == pygame.QUIT:
             running = False
-
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
+            role_rect.y += 5
+            '''
+            按键是默认只能按下一次，于是就取了一个巧，查看哪些按键是已进按下的，后通过循环实现对应操作
+            key_pressed = pygame.key.get_pressed()
+                if key_pressed[pygame.K_a] or key_pressed[pygame.K_LEFT]
+                    plane_temp.move_left()
+            '''
     # Update
-    block_rect.x += 5
-    if block_rect.x > WIDTH:
-        block_rect.x = 0
+
 
     # Draw / render
     screen.fill(BLACK) # 可以先隐藏fill来说明动画原理
-    screen.blit(block, block_rect)
+    screen.blit(role, role_rect)
 
     # *after* drawing everything, flip the display
     pygame.display.flip()

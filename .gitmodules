@@ -2,3 +2,6 @@
 [submodule "PythonFunnyProgram/02.pygame/kidscancode_pygame_tutorials"]
 	path = PythonFunnyProgram/02.pygame/kidscancode_pygame_tutorials
 	url = git@github.com:kidscancode/pygame_tutorials.git
+[submodule "PythonFunnyProgram/02.pygame/Demos/jxzj"]
+	path = PythonFunnyProgram/02.pygame/Demos/jxzj
+	url = git@github.com:zxf20180725/pygame-jxzj.git
