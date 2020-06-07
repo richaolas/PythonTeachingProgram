@@ -88,7 +88,7 @@ while running:
 
     # Draw / render
     screen.fill(BLACK) # 可以先隐藏fill来说明动画原理
-    x = (int)(frame)*32
+    x = (int)(frame) * 32
     y = direct * 32
     screen.blit(role, (WIDTH / 2, HEIGHT / 2), (x, y, 32, 32))
 
