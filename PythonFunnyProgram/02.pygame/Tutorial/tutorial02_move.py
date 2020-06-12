@@ -61,6 +61,14 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
             role_rect.y += 5
+            if role_rect
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
+            role_rect.y -= 5
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
+            role_rect.x += 5
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
+            role_rect.x -= 5
+
             '''
             按键是默认只能按下一次，于是就取了一个巧，查看哪些按键是已进按下的，后通过循环实现对应操作
             key_pressed = pygame.key.get_pressed()
