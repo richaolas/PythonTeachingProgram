@@ -67,7 +67,7 @@ DIR_RIGHT = 3
 role = [role_up, role_down, role_left, role_right]
 role_rect = role[0][0].get_rect()
 # center the sprite on the screen
-role_rect.center = (WIDTH / 2, HEIGHT / 2)
+role_rect.center = (WIDTH // 2, HEIGHT // 2)
 
 direct = DIR_DOWN
 
@@ -90,32 +90,37 @@ while running:
         if key_pressed[pygame.K_a] or key_pressed[pygame.K_LEFT]
             plane_temp.move_left()
     '''
+    speed = 5
+
     key_pressed = pygame.key.get_pressed()
+
+    if key_pressed[pygame.K_SPACE]:
+        speed *= 3
     # if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
     if key_pressed[pygame.K_s]:
         direct = DIR_DOWN
-        role_rect.y += 5
+        role_rect.y += speed
         if role_rect.y > HEIGHT:
             role_rect.y = 0
 
     if key_pressed[pygame.K_w]:
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_w:
         direct = DIR_UP
-        role_rect.y -= 5
+        role_rect.y -= speed
         if role_rect.y < 0:
             role_rect.y = HEIGHT
 
     if key_pressed[pygame.K_d]:
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_d:
         direct = DIR_RIGHT
-        role_rect.x += 5
+        role_rect.x += speed
         if role_rect.x > WIDTH:
             role_rect.x = 0
 
     if key_pressed[pygame.K_a]:
         # if event.type == pygame.KEYDOWN and event.key == pygame.K_a:
         direct = DIR_LEFT
-        role_rect.x -= 5
+        role_rect.x -= speed
         if role_rect.x < 0:
             role_rect.x = WIDTH
 
