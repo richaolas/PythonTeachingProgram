@@ -1,46 +1,19 @@
-# 1. turtle.pensize           设置画笔大小
-# 2. turtle.forward           前进
-# 3. turtle.done              完成绘制，显示窗口
-
-#    turtle.goto
-#    turtle.left
-#    turtle.right
-#    turtle.setheading
-
-#    turtle.penup
-#    turtle.pendown
-#    turtle.circle
-
-#    turtle.pencolor
-#    turtle.fillcolor
-#    turtle.begin_fill
-#    turtle.end_fill
-
-#    turtle.setup
-#    turtle.bgcolor
-#    turtle.window_width
-#    turtle.window_height
-#    turtle.speed
-#    turtle.hideturtle
-#    turtle.showturtle
-
 import turtle
+import math
 
 w = turtle.window_width()
 h = turtle.window_height()
 
 turtle.speed(0)
 turtle.hideturtle()
-
-# draw background
 turtle.bgcolor('skyblue')
+star_size = 20
 
 # draw star
-star_size = 20
 turtle.penup()
 turtle.goto(200, 280)
 turtle.pendown()
-turtle.pencolor('yellow')
+turtle.pencolor('black')
 turtle.fillcolor('yellow')
 turtle.begin_fill()
 for i in range(5):
@@ -50,11 +23,25 @@ for i in range(5):
     turtle.left(72)
 turtle.end_fill()
 
+#draw moon
+r = 80
+turtle.penup()
+turtle.goto(0, 100)
+turtle.pendown()
+turtle.pencolor('black')
+turtle.fillcolor('yellow')
+turtle.begin_fill()
+turtle.circle(r, 180)
+turtle.setheading(360-45)
+turtle.circle(-r * math.sqrt(2.0) ,90)
+turtle.end_fill()
+
 # draw sea
-turtle.color('blue')
 turtle.penup()
 turtle.goto(-w/2, 0)
+turtle.setheading(0)
 turtle.pendown()
+turtle.color('blue')
 turtle.begin_fill()
 turtle.forward(w)
 turtle.right(90)
@@ -91,21 +78,17 @@ turtle.goto(-100,-100)
 turtle.end_fill()
 
 turtle.penup()
-turtle.goto(-70,-160)
+turtle.goto(-70,-120)
 turtle.setheading(0)
 turtle.pendown()
 turtle.fillcolor('white')
 turtle.begin_fill()
-turtle.circle(20, 360)
+turtle.circle(-20, 360)
 turtle.end_fill()
 
-turtle.penup()
-turtle.goto(-70,-140)
-turtle.setheading(0)
-turtle.pendown()
 turtle.fillcolor('black')
 turtle.begin_fill()
-turtle.circle(10, 360)
+turtle.circle(-10, 360)
 turtle.end_fill()
 
 turtle.done()
