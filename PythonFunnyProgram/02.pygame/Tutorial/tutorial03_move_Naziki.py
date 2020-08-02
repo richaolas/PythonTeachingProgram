@@ -125,7 +125,9 @@ while running:
             role_rect.x = WIDTH
 
     # Update
-    frame = (frame + 0.1) % 3
+    #cnt = len([x for x in key_pressed if x])
+    if key_pressed[pygame.K_s] or key_pressed[pygame.K_w] or key_pressed[pygame.K_d] or key_pressed[pygame.K_a]:
+        frame = (frame + 0.13) % 3
 
     # Draw / render
     screen.fill(BLACK) # 可以先隐藏fill来说明动画原理

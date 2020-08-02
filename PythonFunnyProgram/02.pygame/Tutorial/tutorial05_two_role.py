@@ -32,6 +32,7 @@ import os
 WIDTH = 360
 HEIGHT = 480
 FPS = 30 # frame per second
+life = 3
 
 # define colors
 WHITE = (255, 255, 255)
@@ -63,6 +64,21 @@ role_right = [
     pygame.image.load(os.path.join("res/Naziki", "Naziki_right_01.png")),
     pygame.image.load(os.path.join("res/Naziki", "Naziki_right_02.png")),
     pygame.image.load(os.path.join("res/Naziki", "Naziki_right_03.png"))]
+
+slime_left = [
+    pygame.image.load(os.path.join("res/slime", "slime_left_01.png")),
+    pygame.image.load(os.path.join("res/slime", "slime_left_02.png")),
+    pygame.image.load(os.path.join("res/slime", "slime_left_03.png"))]
+
+slime = [slime_left]
+slime_rect = slime[0][0].get_rect()
+slime_rect.center = (WIDTH // 2 + 100, HEIGHT // 2)
+slime_d = 0
+slime_speed = 8
+slime_frame = 0
+
+heart = pygame.image.load(os.path.join("res/", "heart.png"))
+heart_rect = heart.get_rect()
 
 grass = pygame.image.load(os.path.join("res/", "grass.png"))
 grass_rect = grass.get_rect()
@@ -137,6 +153,31 @@ while running:
     if key_pressed[pygame.K_s] or key_pressed[pygame.K_w] or key_pressed[pygame.K_d] or key_pressed[pygame.K_a]:
         frame = (frame + 0.13) % 3
 
+    slime_frame = slime_frame + 1
+
+    if slime_frame % 5== 0:
+        slime_d = random.randint(0, 3)
+
+    if slime_d == 0:
+        slime_rect.y -= slime_speed
+        if slime_rect.y < 0:
+            slime_rect.y = 0
+
+    if slime_d == 2:
+        slime_rect.y += slime_speed
+        if slime_rect.y + slime_rect.height > HEIGHT:
+            slime_rect.y = HEIGHT - slime_rect.height
+
+    if slime_d == 1:
+        slime_rect.x += slime_speed
+        if slime_rect.x + slime_rect.width > WIDTH:
+            slime_rect.x = WIDTH - slime_rect.width
+
+    if slime_d == 3:
+        slime_rect.x -= slime_speed
+        if slime_rect.x < 0:
+            slime_rect.x = 0
+
     # Draw / render
     screen.fill(BLACK) # 可以先隐藏fill来说明动画原理
 
@@ -146,7 +187,33 @@ while running:
             grass_rect.top = r * grass_rect.height
             screen.blit(grass, grass_rect)
 
+    for i in range(life):
+        heart_rect.left = i * heart_rect.width + 10*i
+        heart_rect.top = 10
+        screen.blit(heart, heart_rect)
+
+    # simple understand but not right
+    #if slime_rect.top > role_rect.top and \
+    #        slime_rect.top < role_rect.top + role_rect.height and \
+    #    slime_rect.left > role_rect.left and \
+    #        slime_rect.left < role_rect.left + role_rect.width:
+    #    life = life - 1
+    #    role_rect.left = role_rect.left - 100
+
+    cross_l = max(slime_rect.x, role_rect.x)
+    cross_t = max(slime_rect.y, role_rect.y)
+    cross_r = min(slime_rect.x + slime_rect.width, role_rect.x + role_rect.width)
+    cross_d = min(slime_rect.y + slime_rect.height, role_rect.y + role_rect.height)
+
+    if cross_l < cross_r and cross_t < cross_d:
+        life = life - 1
+        next_loc = role_rect.left - (role_rect.width + slime_rect.width + 20)
+        if next_loc < 0:
+            next_loc = WIDTH - role_rect.width
+        role_rect.left = next_loc
+
     screen.blit(role[direct][int(frame)], role_rect)
+    screen.blit(slime[0][int(slime_frame/10.0%3)], slime_rect)
 
     # *after* drawing everything, flip the display
     pygame.display.flip()
