@@ -16,31 +16,40 @@ import sys
 pygame.init()
 # create a screen
 screen = pygame.display.set_mode([800,600])
+clock = pygame.time.Clock()
 # fill with color WHITE
 screen.fill([255,255,255])
 # load and show the image of lanbo
-jpgFileName = './res/first/lanbo800_600.jpg'
+jpgFileName = './res/dingdang.png'
 imgRect = pygame.image.load(jpgFileName)
 screen.blit(imgRect,[0,0])
 # load and show the sound of firstblood
 wavFileName = './res/first/FirstBlood.wav'
-sndTrack = pygame.mixer.music.load(wavFileName)
+#sndTrack = pygame.mixer.music.load(wavFileName)
 
-r = pygame.rect()
-
-
-pygame.mixer.music.play()
+#pygame.mixer.music.play()
 # flip
-pygame.display.flip()
+#pygame.display.flip()
 # LOOP: mRunning
 mRunning = True
+
+w = 10
+h = 20
+
+FPS = 30
+
 while mRunning:
+    clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             mRunning = False
     screen.fill([255, 255, 255])
-    screen.blit(imgRect, [0, 0])
-    #pygame.display.flip()
+    pygame.draw.rect(screen, (160,120,90), (100,100,w,h))
+    screen.blit(imgRect, [100 + 4 + w, 100 - (imgRect.get_rect().width-h)//2])
+    if w <= 600:
+        w = w + 10
+    #screen.blit(imgRect, [0, 0])
+    pygame.display.flip()
 
 pygame.quit()
 sys.exit()
