@@ -1,4 +1,13 @@
-lst=[1,2,'a','bc']
+q = [10, 20, 93,81,85,92,0,1,2,100]
+#w = q
+#w.sort()
+#print(w)
 
-lst.insert(-2, 0)
-print(lst)
+
+for e in range(len(q)):
+    a = e
+    for s in range(a+1,len(q)):
+        if s < a:
+            a = s
+    q[a], q[e] = q[e], q[a]
+print(q)

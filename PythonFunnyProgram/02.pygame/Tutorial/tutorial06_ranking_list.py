@@ -7,10 +7,10 @@
 5. 初始化游戏：包括pygame对象本身，背景，游戏对象（初始化类的实例）以及可能想要添加的任何其他一些代码。
 6. 主循环：将任何输入处理（即，观察用户按键/鼠标按钮），更新游戏对象的代码，最后更新屏幕。
 '''
-
 # import zone
 import pygame
 import sys
+import random
 
 # initialize pygame
 pygame.init()
@@ -20,23 +20,24 @@ clock = pygame.time.Clock()
 # fill with color WHITE
 screen.fill([255,255,255])
 # load and show the image of lanbo
-jpgFileName = './res/dingdang.png'
-imgRect = pygame.image.load(jpgFileName)
-screen.blit(imgRect,[0,0])
-# load and show the sound of firstblood
-wavFileName = './res/first/FirstBlood.wav'
-#sndTrack = pygame.mixer.music.load(wavFileName)
+roles = []
+scores = []
+colors = []
+for i in range(10):
+    roles.append(pygame.image.load('./res/youxia/(%d).png'%(i+1)))
+    scores.append(random.randint(30, 100))
+    colors.append((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
 
-#pygame.mixer.music.play()
-# flip
-#pygame.display.flip()
 # LOOP: mRunning
 mRunning = True
 
-w = 10
-h = 20
-
 FPS = 30
+
+xmin, xmax = 100, 600
+ymin = 20
+h = 20
+width = 0  #process
+speed = 5
 
 while mRunning:
     clock.tick(FPS)
@@ -44,11 +45,21 @@ while mRunning:
         if event.type == pygame.QUIT:
             mRunning = False
     screen.fill([255, 255, 255])
-    pygame.draw.rect(screen, (160,120,90), (100,100,w,h))
-    screen.blit(imgRect, [100 + 4 + w, 100 - (imgRect.get_rect().width-h)//2])
-    if w <= 600:
-        w = w + 10
-    #screen.blit(imgRect, [0, 0])
+
+    for i in range(len(roles)):
+        y = ymin + (h  + 40) * i
+        w = width
+        dst = scores[i] / 100 * (xmax-xmin) # 最终目标的长度
+        if width > dst:                  # 如果没有达到最周目标，继续画
+            w = dst
+        pygame.draw.rect(screen, colors[i], (xmin, y, w, h))
+        screen.blit(roles[i], [xmin + w + 4, y - (roles[i].get_rect().height-h)//2])
+
+    if xmin + width < xmax:
+        width += speed
+    else:
+        width = xmax - xmin
+
     pygame.display.flip()
 
 pygame.quit()
