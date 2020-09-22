@@ -1,13 +1,30 @@
-q = [10, 20, 93,81,85,92,0,1,2,100]
-#w = q
-#w.sort()
-#print(w)
+#是否是数字
+def isnum(c):
+    if c not in '+-*/':
+        return True
+    return False
+
+#分离数字和操作符
+def splitCal(content):
+    numLst = []
+    opLst = []
+    temp = ''
+    for i in range(len(content)):
+        if isnum(content[i]):
+            if i == len(content) - 1:
+                numLst.append(float(content[len(temp) + 1:]))
+        else:
+            if content[i] != '.':
+                start = len(temp)
+            else:
+                1/0
+            if start > 0:
+                start = len(temp) + 1
+            numLst.append(float(content[start:i]))
+            opLst.append(content[i])
+            temp = content[:i]
+    return numLst, opLst
 
 
-for e in range(len(q)):
-    a = e
-    for s in range(a+1,len(q)):
-        if s < a:
-            a = s
-    q[a], q[e] = q[e], q[a]
-print(q)
+a, b = splitCal("  300.01   +4  *5+6-7")
+print(a, b)
