@@ -19,7 +19,7 @@ def splitCal(content):
     return numLst, opLst
 
 
-def calc(numLst, opLst):
+def calc2(numLst, opLst):
     numtmp = []
     optmp = []
 
@@ -36,6 +36,22 @@ def calc(numLst, opLst):
 
     return cal(numtmp[0], optmp[0], numtmp[1])
 
+def calc(numLst, opLst, callist):
+    i = 0
+    while i < len(opLst):
+        if opLst[i] in callist:
+            numLst[i] = cal(numLst[i], opLst[i], numLst[i+1])
+            del opLst[i]
+            del numLst[i+1]
+        else:
+            i += 1
+
+def calculator(numLst, opLst):
+    calc(numLst, opLst, '*/')
+    calc(numLst, opLst, '+-')
+    return numLst[0]
+
+
 #计算两个数的四则运算
 def cal(a,op,b):
     if op == "+":
@@ -51,16 +67,18 @@ def cal(a,op,b):
 
 s = '1*8+90-100/3+8*7-6*6*6/5'
 #s = '1+8*9+9-100'
-s = '1-1'
+#s = '1*1'
 numLst, opLst = splitCal(s)
 print(numLst, opLst)
-print(calc(numLst, opLst), eval(s))
+#print(calc(numLst, opLst), eval(s))
+print(eval(s))
+assert (eval(s) == calculator(numLst, opLst))
+print(calculator(numLst, opLst))
+#li = [1,2,3]
 
-li = [1,2,3]
-
-for i in li:
-    print(i)
-    li.remove(li[0])
+#for i in li:
+#    print(i)
+#    li.remove(li[0])
 
 
 #for op in opLst:

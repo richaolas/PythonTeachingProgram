@@ -1,8 +1,9 @@
 import turtle
 
 # set attribute
-turtle.speed(1)
+turtle.speed(0)
 turtle.hideturtle()
+turtle.colormode(255)
 
 R = 200
 r = 100
@@ -36,7 +37,7 @@ turtle.penup()
 turtle.goto(RA)
 turtle.pendown()
 
-turtle.color('yellow')
+turtle.color(249, 219, 69)
 turtle.begin_fill()
 turtle.setheading(0)
 turtle.circle(R, 360/3)
@@ -51,7 +52,7 @@ turtle.penup()
 turtle.goto(RB)
 turtle.pendown()
 
-turtle.color('red')
+turtle.color(224, 77, 43)
 turtle.begin_fill()
 turtle.setheading(120)
 turtle.circle(R, 360/3)
@@ -66,7 +67,7 @@ turtle.penup()
 turtle.goto(RC)
 turtle.pendown()
 
-turtle.color('green')
+turtle.color(114, 211, 118)
 turtle.begin_fill()
 turtle.setheading(360/3*2)
 turtle.circle(R, 360/3)
@@ -83,7 +84,7 @@ turtle.pendown()
 turtle.setheading(270)
 turtle.forward(r-15)
 turtle.setheading(0)
-turtle.color('blue')
+turtle.color(36, 171, 218)
 turtle.begin_fill()
 turtle.circle(r-15)
 turtle.end_fill()
