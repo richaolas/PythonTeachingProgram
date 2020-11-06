@@ -1,26 +1,33 @@
-wordBook = {'red':'红色', 'desk':'桌子', 'food':'食物', 'car':'车子', 'gun':'枪'}
-#接下来就是开始我们每一轮的检查啦，直到不需要检查为止
-checkBook = wordBook.copy()
+wordBook = {'教师':'tutor', '向前':'forward', '后退':'backward', '右转':'right', '左转':'left', '海龟':'turtle'}
 
-print(id(wordBook['red']))
-del wordBook['red']
-print(id(checkBook['red']))
-
-print("床前明月光")
-print("依珊以上雙")
-print("舉頭望明月")
-print("低頭思故鄉")
+# while len(wordBook) > 0:
+# for i in wordBook:
+#     del wordBook[i]
 
 
-import turtle
-turtle.pensize(30)
-turtle.dot()
-turtle.pensize(1)
-turtle.forward(60)
-turtle.pensize(30)
-turtle.dot()
-#turtle.forward(-100)
-turtle.done()
+# wordBook = {'red':'红色', 'desk':'桌子', 'food':'食物', 'car':'车子', 'gun':'枪'}
+# #接下来就是开始我们每一轮的检查啦，直到不需要检查为止
+# checkBook = wordBook.copy()
+#
+# print(id(wordBook['red']))
+# del wordBook['red']
+# print(id(checkBook['red']))
+#
+# print("床前明月光")
+# print("依珊以上雙")
+# print("舉頭望明月")
+# print("低頭思故鄉")
+#
+#
+# import turtle
+# turtle.pensize(30)
+# turtle.dot()
+# turtle.pensize(1)
+# turtle.forward(60)
+# turtle.pensize(30)
+# turtle.dot()
+# #turtle.forward(-100)
+# turtle.done()
 
 
 
