@@ -4,7 +4,7 @@ import turtle
 current_question = 0
 
 question_list = [
-    {'content': '整数在Python中是用什么表示的?', 'options': ['int', 'float', 'str'], 'answer': 0},
+    {'content': '整数在''Python中是用什么表示的?', 'options': ['int', 'float', 'str'], 'answer': 0},
     {'content': '怎样在Python中输出?', 'options': ['while', 'print', 'input'], 'answer': 1},
     {'content': '条件判断在Python中是怎么写的?', 'options': ['if', 'list', 'turtle'], 'answer': 0},
 ]
