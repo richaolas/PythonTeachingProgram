@@ -47,7 +47,7 @@ role = pygame.Surface((50, 50)) #pygame.image.load(os.path.join("res", "arrowRig
 role.fill(GREEN)
 role_rect = role.get_rect()
 # center the sprite on the screen
-role_rect.center = (WIDTH / 2, HEIGHT / 2)
+role_rect.center = (WIDTH // 2, HEIGHT // 2)
 
 # Game loop
 running = True

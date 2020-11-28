@@ -44,7 +44,7 @@ block = pygame.Surface((50, 50))
 block.fill(GREEN)
 block_rect = block.get_rect()
 # center the sprite on the screen
-block_rect.center = (WIDTH / 2, HEIGHT / 2)
+block_rect.center = (WIDTH // 2, HEIGHT // 2)
 
 # Game loop
 running = True
