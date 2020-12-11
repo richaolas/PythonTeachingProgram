@@ -3,8 +3,8 @@ import math
 
 # color_dic = {'green': (300, 140), 'red': (300), 'blue': (___), 'yellow': (___)}
 
-color_pane = {'lt': (300, 200), 'padding': 10, 'color_r': 25}
-colors = ('green', 'red', 'blue', 'yellow')
+color_pane = {'lt': None, 'padding': 10, 'color_r': 25, 'width':None, 'height':None}
+colors = ('green', 'red', 'blue', 'yellow', 'black', 'pink')
 
 color_centers = {}
 
@@ -13,11 +13,21 @@ height = turtle.window_height()
 
 def init():
     global color_centers
-    pos = color_pane['lt']
+
+    color_pane['width'] = color_pane['padding'] * 2 + color_pane['color_r'] * 2
+    color_pane['height'] = color_pane['padding'] * (len(colors) + 1) +  color_pane['color_r'] * 2 * len(colors)
+
+    x = width/2 - color_pane['width'] - color_pane['padding']
+    y = color_pane['height'] / 2
+
+    pos = color_pane['lt'] = (x, y)
+    turtle.goto((pos))
     #pos[0] += (color_pane['padding'] + color_pane['color_r'])
     for i in range(len(colors)):
-        color_centers[colors[i]] = (pos[0] + color_pane['padding'] + color_pane['color_r'],
-                    pos[1] - i * (color_pane['padding'] + color_pane['color_r']*2) - color_pane['padding'] - color_pane['color_r'])
+        #color_centers[colors[i]] = (pos[0] + color_pane['width']/2,
+        #            pos[1] - i * (color_pane['padding'] + color_pane['color_r']*2) - color_pane['padding'] - color_pane['color_r'])
+        color_centers[colors[i]] = (pos[0] + color_pane['width'] / 2,
+                                    pos[1] - color_pane['padding'] - i * (color_pane['color_r'] * 2 + color_pane['padding']) - color_pane['color_r'])
 
 
 
@@ -28,9 +38,9 @@ def draw_color_pane():
     p1.goto(color_pane['lt'])
     p1.pendown()
     for i in range(2):
-        p1.fd((color_pane['padding'] + color_pane['color_r'])*2)
+        p1.fd(color_pane['width'])
         p1.right(90)
-        p1.fd(color_pane['padding'] * 5 + color_pane['color_r']*8)
+        p1.fd(color_pane['height'])
         p1.right(90)
     #p1.penup()
     for c in colors:
@@ -112,11 +122,12 @@ turtle.onkeypress(down, 'Down')
 turtle.onkeypress(left, 'Left')
 turtle.onkeypress(right, 'Right')
 turtle.onscreenclick(screen_click)
+turtle.listen()
 #while True:
 #    p.goto(0,0)
  #   turtle.update()
 turtle.getscreen().cv.bind("<Motion>", mouse_motion)
-turtle.listen()
+
 
 
 
