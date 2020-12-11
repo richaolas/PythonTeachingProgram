@@ -118,19 +118,19 @@ while running:
 
     # Checks for hitting trees and getting flag
     hit = pygame.sprite.spritecollide(skier, obstacles, False)
-    # if hit:
-    #     if hit[0].obs_type == "tree" and not hit[0].passed:
-    #         points = points - 100
-    #         skier.image = pygame.image.load("skier_crash.png")
-    #         animate()
-    #         pygame.time.delay(1000)
-    #         skier.image = pygame.image.load("skier_down.png")
-    #         skier.angle = 0
-    #         speed = [0, 6]
-    #         hit[0].passed = True
-    #     elif hit[0].obs_type == "flag" and not hit[0].passed:
-    #         points += 10
-    #         hit[0].kill()
+    if hit:
+        if hit[0].obs_type == "tree" and not hit[0].passed:
+            points = points - 100
+            skier.image = pygame.image.load("skier_crash.png")
+            animate()
+            pygame.time.delay(1000)
+            skier.image = pygame.image.load("skier_down.png")
+            skier.angle = 0
+            speed = [0, 6]
+            hit[0].passed = True
+        elif hit[0].obs_type == "flag" and not hit[0].passed:
+            points += 10
+            hit[0].kill()
 
     obstacles.update()
     print(len(obstacles.sprites()))

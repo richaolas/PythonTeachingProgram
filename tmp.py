@@ -1,15 +1,69 @@
-import turtle as t
+import turtle
 
-t.tracer(2, 30)
+x = 0.1
 
-dist = 2
+for i in range(1000):
+    y = 1/x
+    turtle.goto(x*50,y*50)
+    x += 0.1
+# turtle.speed(1)
+# turtle.pencolor('red')
+# turtle.forward(0.1)
+# turtle.left(90)
+# turtle.forward(100)
+#
+# turtle.goto()
+# turtle.penup()
+# turtle.home()
+# turtle.pendown()
+# turtle.pencolor('blue')
+# turtle.forward(0.9)
+# turtle.left(90)
+# turtle.forward(100)
 
-for i in range(200):
-    t.fd(dist)
-    t.rt(90)
-    dist += 2
+turtle.done()
 
-t.done()
+
+
+
+
+
+
+# import turtle
+#
+# turtle.setup(100,100)
+# turtle.bgpic('timg.gif')
+#
+# turtle.done()
+
+
+
+
+
+
+
+
+# import tensorflow as tf
+#
+# inputs = tf.random.normal([1, 7, 7, 3])
+# print(inputs.shape)
+# conv = tf.keras.layers.Conv2D(6, 3, strides=2, padding='same')
+# outputs = conv(inputs)
+# print(outputs.shape)
+#
+#
+# # x = tf.random.normal([1,56,56,3]) # 模拟输入，3 通道，高宽为5
+# #
+# #
+# # layer = tf.keras.layers.Conv2D(4,kernel_size=3,strides=1,padding='SAME')
+# # out = layer(x) # 前向计算
+# # print(layer.p)
+# # #layer.build(x)
+# # #print(layer.input)
+# # print(out.shape)
+
+
+
 
 
 
