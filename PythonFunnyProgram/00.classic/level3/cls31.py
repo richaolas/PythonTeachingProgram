@@ -133,3 +133,37 @@ turtle.getscreen().cv.bind("<Motion>", mouse_motion)
 
 
 turtle.done()
+-----------------------------------------------
+import turtle
+
+color_pane = {'loc': None, 'padding': 10, 'r': 25, 'w': None, 'h': None}
+colors = {'red', 'blue', 'yellow', 'black', 'pink', 'green'}
+
+width = turtle.window_width()
+height = turtle.window_height()
+
+def init():
+    global color_pane
+    w = 2 * color_pane['padding'] + 2 * color_pane['r']
+    color_pane['w'] = w
+    h = 2 * len(colors) * color_pane['r'] + (len(colors) + 1) * color_pane['padding']
+    color_pane['h'] = h
+    x = width / 2 - w - color_pane['padding']
+    y = h / 2
+    color_pane['loc'] = (x, y)
+
+def draw_color_pane():
+    turtle.penup()
+    turtle.goto(color_pane['loc'])
+    turtle.pendown()
+
+    for i in range(2):
+        turtle.forward(color_pane['w'])
+        turtle.right(90)
+        turtle.forward(color_pane['h'])
+        turtle.right(90)
+
+init()
+draw_color_pane()
+
+turtle.done()
