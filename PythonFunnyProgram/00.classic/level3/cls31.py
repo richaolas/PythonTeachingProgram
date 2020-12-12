@@ -1,5 +1,6 @@
 import turtle
 import math
+import tkinter
 
 # color_dic = {'green': (300, 140), 'red': (300), 'blue': (___), 'yellow': (___)}
 
@@ -100,9 +101,9 @@ def mouse_motion(event):
         return
     drawing = True
     #turtle.getscreen().cv.bind("<Motion>", None)
-    if event.state == 264:
-        p.goto(event.x - width/2, -event.y + height/2)
-    print(event)
+    #if event.state == 264:  # 不同系统和版本这个数字不相同，需要找到状态数字名才行
+    p.goto(event.x - width/2, -event.y + height/2)
+    #print(event.state)
     #turtle.
     turtle.update()
     drawing = False
@@ -126,7 +127,7 @@ turtle.listen()
 #while True:
 #    p.goto(0,0)
  #   turtle.update()
-turtle.getscreen().cv.bind("<Motion>", mouse_motion)
+turtle.getscreen().cv.bind("<B1-Motion>", mouse_motion)
 
 
 
