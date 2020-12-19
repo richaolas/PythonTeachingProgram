@@ -9,7 +9,7 @@ def splitCal(content):
     start = -1
     for i in range(len(content)):
         if isnum(content[i]) and start < 0:
-                start = i
+            start = i
         if not isnum(content[i]):
             opLst.append(content[i])
             numLst.append(float(content[start:i]))
