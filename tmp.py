@@ -1,46 +1,35 @@
-import turtle
-
-color_pane = {'lt': None, 'padding': 10, 'color_r': 25, 'width': None, 'height': None}
-colors = ('green', 'red', 'blue', 'yellow', 'black', 'pink')
-
-color_centers = {}
-
-width = turtle.window_width()
-height = turtle.window_height()
-
-def lt ():
-    color_pane['width'] = color_pane['padding'] * 2 + color_pane['color_r'] * 2
-    color_pane['height'] = (color_pane['padding'] + 2 *color_pane['color_r']) * len(colors) + color_pane['padding']
-
-    x = width / 2 - color_pane['width'] - color_pane['padding']
-    y = color_pane['height'] / 2
-
-    color_pane['lt'] = (x, y)
-
-    turtle.penup()
-    turtle.goto(color_pane['lt'])
-    turtle.pendown()
-
-    for i in range(2):
-        turtle.forward(color_pane['width'])
-        turtle.right(90)
-        turtle.forward(color_pane['height'])
-        turtle.right(90)
-    pass
-
-def color_dot():
-    turtle.forward(color_pane['width'] / 2)
-    turtle.right(90)
-    turtle.penup()
-    turtle.backward(color_pane['color_r'])
-    for i in (colors):
-        turtle.forward(color_pane['padding'] + color_pane['color_r'] * 2)
-        turtle.pencolor(i)
-        turtle.pendown()
-        turtle.dot(color_pane['color_r'] * 2)
-        turtle.penup()
-    pass
-
-lt()
-color_dot()
-turtle.done()
+from turtle import*
+import time
+shape('turtle')
+penup()
+fillcolor('black')
+begin_fill()
+goto(-50, -100)
+pendown()
+left(90)
+forward(200)
+right(90)
+forward(100)
+right(90)
+forward(200)
+right(90)
+forward(100)
+end_fill()
+penup()
+goto(0,0)
+setheading(0)
+left(90)
+forward(50)
+right(180)
+dot(50,'red')
+time.sleep(6)
+dot(50,'#f99078')
+forward(50)
+dot(50,'yellow')
+time.sleep(6)
+dot(50,'#E3F97A')
+forward(50)
+dot(50,'green')
+time.sleep(6)
+dot(50,'#82F97A')
+done()
