@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{{name}}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    body {
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
+    </style>
+    <script>
+      num = 1
+      function search(){
+        var txt = document.getElementById('searchTxt').value;
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "col-md-4");
+        var h_2 = document.createElement("h2");
+        h_2.innerHTML = "为你爬取分数最高的菜谱";
+        num += 1
+        var p1 = document.createElement("p");
+        p1.innerHTML = txt
+        var d = document.getElementById("contents");
+        div1.appendChild(h_2);
+        div1.appendChild(p1);
+        d.appendChild(div1);
+        document.getElementById('searchTxt').value = ""
+        var httpReq = new XMLHttpRequest();
+        url = 'http://' + window.location.host + '/searh/'
+        httpReq.open('GET', url + txt, true);
+        httpReq.send();
+        httpReq.onreadystatechange = function () {
+            if (httpReq.readyState == 4 && httpReq.status == 200) {
+                var json = httpReq.responseText
+                window.location = url + txt
+            }
+        }
+
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">女神记事本</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <div class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" id="searchTxt" placeholder="做啥菜" class="form-control">
+            </div>
+            <button class="btn btn-success" onclick="search()">搜一搜</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>妈妈你辛苦啦</h1>
+        <p>做个记事本帮妈妈记录:)</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="contents" class="row">
+        <div class="col-md-4">
+          <h2>{{title}}</h2>
+          <p>做过人数热度:{{num}}|{{author}}</p>
+        </div>
+        {% macro render_comment(comment) %}
+          <p>{{comment}}</p>
+        {% endmacro %}
+        <div class="col-md-4">
+            <h2>用料</h2>
+            {% for ftype in foodType %}
+              {{ render_comment(ftype) }}
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <h2>做法</h2>
+            {% for way in foodWay %}
+              {{ render_comment(way) }}
+            {% endfor %}
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; vipJr.</p>
+      </footer>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-3.1.1.min.js"><\/script>')</script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

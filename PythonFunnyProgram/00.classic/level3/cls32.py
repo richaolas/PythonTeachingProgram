@@ -45,6 +45,7 @@ def show_question():
         draw_text(question_list[current_question]['content'], question_pane['content_loc'])
         for i, s, l in zip('ABC', question_list[current_question]['options'], question_pane['option_loc']):
             draw_text(i + '.' + s, l)
+    turtle.update()
 
 
 def show_hint(type):
@@ -71,11 +72,10 @@ def check_pos(x, y):
     elif answer != -1:
         show_hint('err')
 
-
+turtle.tracer(0)
 turtle.hideturtle()
 turtle.bgcolor('skyblue')
 turtle.setup(question_pane['size'][0], question_pane['size'][1])
 show_question()
-turtle.tracer(0)
 turtle.onscreenclick(check_pos)
 turtle.done()
