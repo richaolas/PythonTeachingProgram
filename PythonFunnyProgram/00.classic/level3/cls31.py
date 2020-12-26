@@ -12,15 +12,14 @@ def init():
     global color_centers
 
     color_pane['width'] = (color_pane['padding'] + color_pane['radius']) * 2
-    color_pane['height'] = (color_pane['padding'] + color_pane['radius'] * 2) * (len(colors) + 1) + \
-                           color_pane['padding']
+    color_pane['height'] = (color_pane['padding'] + color_pane['radius'] * 2) * len(colors) + color_pane['padding']
 
     x = width / 2 - color_pane['padding'] - color_pane['width']
     y = color_pane['height'] / 2
     pos = color_pane['lt'] = (x, y)
 
     for i in range(len(colors)):
-        h = (color_pane['padding'] + color_pane['radius'] * 2) * (i + 1) - color_pane['padding']
+        h = (color_pane['padding'] + color_pane['radius'] * 2) * (i + 1) - color_pane['radius']
         color_centers[colors[i]] = (pos[0] + color_pane['width'] / 2, pos[1] - h)
 
 
@@ -37,11 +36,9 @@ def draw_color_pane():
         p1.right(90)
     for c in colors:
         p1.penup()
-        p1.goto(color_centers[c])
+        p1.goto(color_centers[c][0], color_centers[c][1] - color_pane['radius'])
         p1.pendown()
         p1.color(c)
-        p1.setheading(270)
-        p1.forward(color_pane['radius'])
         p1.setheading(0)
         p1.begin_fill()
         p1.circle(color_pane['radius'])
@@ -70,7 +67,7 @@ def right():
 
 def screen_click(x, y):
     for c, center in color_centers.items():
-        if (center[0] - x) ** 2 + (center[1] - y) ** 2 < color_pane['radius'] ** 2:
+        if (center[0] - x) ** 2 + (center[1] - y) ** 2 <= color_pane['radius'] ** 2:
             p.pencolor(c)
             break
     p.penup()
@@ -107,6 +104,7 @@ turtle.onkeypress(right, 'Right')
 turtle.onscreenclick(screen_click)
 turtle.listen()
 
+# cv: Canvas 画布
 turtle.getscreen().cv.bind("<B1-Motion>", mouse_motion)
 
 turtle.done()
