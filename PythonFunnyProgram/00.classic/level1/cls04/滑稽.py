@@ -1,25 +1,33 @@
 import turtle as t
 t.width(5)
 t.speed(0)
-#脸
+
 # 三原色：红 黄 蓝  颜料
 # 三基色：红 绿 蓝   光
-t.colormode(1)
-t.color(161/255,122/255,44/255)
 # 写数字0-1
+t.colormode(1)
+
+#脸
+t.color(161/255,122/255,44/255)
 t.fillcolor(1,1,0)
 t.begin_fill()
 t.circle(150)
 t.end_fill()
+
+
 # 嘴
 t.up()
 t.goto(0, 130)
 t.down()
 t.dot(220,"black")
 t.up()
+
 t.goto(0, 140)
 t.down()
 t.dot(220,"yellow")
+#t.done()
+
+
 #左眼
 t.fillcolor((1,1,1))
 t.begin_fill()
@@ -67,6 +75,7 @@ t.circle(10,150)
 t.rt(10)
 t.circle(50,40)
 t.end_fill()
+
 t.color('pink','pink')
 t.up()
 t.goto(-90,140)

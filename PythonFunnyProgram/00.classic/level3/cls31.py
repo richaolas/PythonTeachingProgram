@@ -23,26 +23,24 @@ def init():
         color_centers[colors[i]] = (pos[0] + color_pane['width'] / 2, pos[1] - h)
 
 
+def jump(pen, pos):
+    pen.penup()
+    pen.goto(pos)
+    pen.pendown()
+
+
 def draw_color_pane():
     p1 = turtle.Pen()
     p1.hideturtle()
-    p1.penup()
-    p1.goto(color_pane['lt'])
-    p1.pendown()
-    for i in range(2):
-        p1.fd(color_pane['width'])
+    jump(p1, color_pane['lt'])
+
+    for a in ('width', 'height') * 2:
+        p1.fd(color_pane[a])
         p1.right(90)
-        p1.fd(color_pane['height'])
-        p1.right(90)
+
     for c in colors:
-        p1.penup()
-        p1.goto(color_centers[c][0], color_centers[c][1] - color_pane['radius'])
-        p1.pendown()
-        p1.color(c)
-        p1.setheading(0)
-        p1.begin_fill()
-        p1.circle(color_pane['radius'])
-        p1.end_fill()
+        jump(p1, (color_centers[c][0], color_centers[c][1]))
+        p1.dot(color_pane['radius'] * 2, c)
 
 
 def up():
