@@ -27,13 +27,13 @@ size = width, height = 640, 480
 screen = pygame.display.set_mode(size)
 screen.fill([255, 255, 255])
 img_file = "beach_ball.png"
-balls = []  # Creates a list to keep track of balls
+ball_coords = []  # Creates a list to keep track of balls
 for row in range (0, 3):
     for column in range (0, 3):
         location = [column * 180 + 10, row * 180 + 10]
         speed = [choice([-2, 2]), choice([-2, 2])]
         ball = Ball(img_file, location, speed)
-        balls.append(ball)  # Adds each ball to the list as it’s created
+        ball_coords.append(ball)  # Adds each ball to the list as it’s created
 running = True
 while running:
     for event in pygame.event.get():
@@ -42,7 +42,7 @@ while running:
     pygame.time.delay(20)
     # Redraws the screen
     screen.fill([255, 255, 255])
-    for ball in balls:
+    for ball in ball_coords:
             ball.move()
             screen.blit(ball.image, ball.rect)
     pygame.display.flip()
