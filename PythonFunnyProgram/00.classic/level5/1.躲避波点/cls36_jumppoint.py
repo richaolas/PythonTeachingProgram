@@ -23,10 +23,10 @@ def init():
     colors = ['red', 'yellow', 'blue', 'green']
     for i in range(COUNT):
         bg.up()
-        bg.goto((-WIDTH / 2 + i * WIDTH / COUNT, HEIGHT/2))
+        bg.goto((-WIDTH / 2 + i * WIDTH / COUNT, HEIGHT / 2))
         bg.color(colors[i])
         bg.begin_fill()
-        for d in (WIDTH/COUNT, HEIGHT)*2:
+        for d in (WIDTH / COUNT, HEIGHT) * 2:
             bg.forward(d)
             bg.right(90)
         bg.end_fill()
@@ -45,10 +45,10 @@ def draw():
     turtle.update()
 
 
-def move():
+def flush():
     update()
     draw()
-    turtle.ontimer(move, 50)
+    turtle.ontimer(flush, 50)
 
 
 def tap(x, y):
@@ -59,7 +59,7 @@ def tap(x, y):
 
 
 init()
-move()
+flush()
 
 turtle.onscreenclick(tap)
 
