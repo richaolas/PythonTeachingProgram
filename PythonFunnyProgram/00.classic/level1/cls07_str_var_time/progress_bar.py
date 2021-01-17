@@ -1,6 +1,8 @@
 import turtle
 import time
 
+#隐藏turtle
+turtle.ht()
 turtle.bgcolor("black")
 turtle.pensize(5)
 turtle.pencolor("white")
