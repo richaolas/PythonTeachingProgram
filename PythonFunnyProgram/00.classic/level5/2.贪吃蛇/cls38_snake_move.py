@@ -7,13 +7,12 @@ turtle.up()
 SPEED = 10
 SIZE = SPEED
 snake = []
-direction = {'x': 0, 'y': 10}
+direction = {'x': 0, 'y': SPEED}
 
 
 def init():
     for i in range(5):
         snake.append({'x': 0, 'y': -i * SIZE})
-
 
 
 def right():
@@ -44,25 +43,23 @@ def draw(color):
         turtle.dot(SIZE)  # 绘制一节蛇
 
 
-def move():
-    # 改变第一节蛇的坐标
-    #for s in snake:
-    #    s['x'] += direction['x']
-    #    s['y'] += direction['y']
-    #tail = snake[-1]
-    snake.remove(snake[-1])
+def flush():
+    # 增加一节
     head = snake[0].copy()
-    print(id(head), id(snake[0]))
+    #print(id(head), id(snake[0]))
     head['x'] += direction['x']
     head['y'] += direction['y']
     snake.insert(0, head)
-    print(snake)
+
+    # 删除最后一节
+    snake.remove(snake[-1])
 
     draw('red')
-    turtle.ontimer(move, 50)
+    turtle.ontimer(flush, 100)
+
 
 init()
-move()
+flush()
 turtle.onkeypress(up, 'Up')
 turtle.onkeypress(down, 'Down')
 turtle.onkeypress(left, 'Left')
