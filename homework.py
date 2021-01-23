@@ -156,3 +156,44 @@ s[0] = '0'
 # turtle.listen()
 #
 # turtle.done()
+
+
+
+import turtle
+
+a = 150
+angle = 5
+turtle.tracer(False)
+
+def flush():
+    turtle.clear()
+
+    turtle.pensize(1)
+    turtle.fillcolor('brown')
+    turtle.begin_fill()
+    turtle.goto(0,0)
+    turtle.goto(50, -200)
+    turtle.goto(-50, -200)
+    turtle.goto(0, 0)
+    turtle.end_fill()
+
+    turtle.left(angle)
+    turtle.pensize(25)
+    for i in ('red', 'green', 'blue', 'purple'):
+        turtle.color(i)
+        turtle.forward(a)
+        turtle.backward(a)
+        turtle.left(360 / 4)
+    turtle.update()
+    turtle.ontimer(flush, 100)
+
+
+def click(x, y):
+    global angle
+    angle += 5
+
+
+turtle.onscreenclick(click)
+
+flush()
+turtle.done()
