@@ -1,15 +1,15 @@
 import random
 import turtle
 
-turtle.up()
-turtle.tracer(False)
-
 WIDTH = turtle.window_width()
 HEIGHT = turtle.window_height()
 R = 15
 MOVE = 5
 ball_coords = [[0, 0], [100, 100], [200, 200]]
 
+def init():
+    turtle.up()
+    turtle.tracer(False)
 
 def add():
     if random.randint(1, 100) <= 10:
@@ -47,7 +47,7 @@ def flush():
     draw()
     turtle.ontimer(flush, 50)
 
-
+init()
 flush()
 
 turtle.done()
