@@ -3,10 +3,10 @@
 n = 1
 c = 0
 
-while n<100:
-    if n//10 == 5:
+while n < 100:
+    if n // 10 == 5:
         c = c + 1
-    if n%10 == 5:
+    if n % 10 == 5:
         c = c + 1
     n = n + 1
 
@@ -29,9 +29,8 @@ print(result)
 
 a, b = 1, 1
 n = 1
-print(a, b, end = ' ')
+print(a, b, end=' ')
 while n <= 10:
     a, b = b, a + b
-    print(b, end = ' ')
+    print(b, end=' ')
     n = n + 1
-
