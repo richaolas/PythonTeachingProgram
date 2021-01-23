@@ -9,6 +9,7 @@ res.encoding = 'utf-8'
 pat0 = re.compile('window.getAreaStat = ([\s\S]*?)</script>')
 data_list = pat0.findall(res.text)
 data = data_list[0].replace('}catch(e){}','')
+print(data)
 data = eval(data)
 provinceShortNames = []
 confirmedCounts = []

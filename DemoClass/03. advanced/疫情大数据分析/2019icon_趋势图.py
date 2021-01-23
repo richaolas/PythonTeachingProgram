@@ -4,6 +4,40 @@ import time,json,requests
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+
+import urllib, sys
+import ssl
+
+# import urllib.request
+# resp=urllib.request.urlopen('http://www.baidu.com')
+# html=resp.read()
+# print(html)
+#
+# sys.exit()
+
+host = 'https://ncovdata.market.alicloudapi.com'
+path = '/ncov/cityDiseaseInfoWithTrend'
+method = 'GET'
+appcode = 'f9cc3fa2ef32419f845d5234bf0f888b'
+querys = ''
+bodys = {}
+url = host + path
+
+request = urllib.request.Request(url)
+request.add_header('Authorization', 'APPCODE ' + appcode)
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
+response = urllib.request.urlopen(request, context=ctx)
+content = response.read()
+if (content):
+    #print(content)
+    provinceArray = json.loads(content)['provinceArray']
+    hubei = [s for s in provinceArray if s['childStatistic'] == '湖北省']
+    hubei_citys = hubei[0]['cityArray']
+    print(hubei_citys)
+sys.exit()
+
 plt.rcParams[ 'font.sans-serif'] = [ 'FangSong'] # 设置默认字体
 plt.rcParams[ 'axes.unicode_minus'] = False# 解决保存图像时'-'显示为方块的问题
 

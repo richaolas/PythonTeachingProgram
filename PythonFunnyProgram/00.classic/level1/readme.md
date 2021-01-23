@@ -87,7 +87,7 @@
 	<tr>
         <td rowspan="3">09.</td>
         <td rowspan="3">绘制电路</td>
-		<td>布尔类型 True&False</td>
+		<td>布尔类型 True & False</td>
     </tr>
     <tr>
         <td>比较运算符 </td>
@@ -98,6 +98,6 @@
 		<tr>
         <td>10.</td>
         <td>控制灯泡开关</td>
-		<td>逻辑运算 and or </td>
+		<td>逻辑运算 not and or </td>
     </tr>
 </table>
