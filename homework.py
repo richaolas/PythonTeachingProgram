@@ -1,5 +1,5 @@
-s = '123'
-s[0] = '0'
+# s = '123'
+# s[0] = '0'
 
 #
 # #上下左右，左开上，右开下，上关上，下关下
@@ -158,42 +158,51 @@ s[0] = '0'
 # turtle.done()
 
 
+# import turtle
+#
+# a = 150
+# angle = 5
+# turtle.tracer(False)
+#
+# def flush():
+#     turtle.clear()
+#
+#     turtle.pensize(1)
+#     turtle.fillcolor('brown')
+#     turtle.begin_fill()
+#     turtle.goto(0,0)
+#     turtle.goto(50, -200)
+#     turtle.goto(-50, -200)
+#     turtle.goto(0, 0)
+#     turtle.end_fill()
+#
+#     turtle.left(angle)
+#     turtle.pensize(25)
+#     for i in ('red', 'green', 'blue', 'purple'):
+#         turtle.color(i)
+#         turtle.forward(a)
+#         turtle.backward(a)
+#         turtle.left(360 / 4)
+#     turtle.update()
+#     turtle.ontimer(flush, 100)
+#
+#
+# def click(x, y):
+#     global angle
+#     angle += 5
+#
+#
+# turtle.onscreenclick(click)
+#
+# flush()
+# turtle.done()
 
-import turtle
 
-a = 150
-angle = 5
-turtle.tracer(False)
-
-def flush():
-    turtle.clear()
-
-    turtle.pensize(1)
-    turtle.fillcolor('brown')
-    turtle.begin_fill()
-    turtle.goto(0,0)
-    turtle.goto(50, -200)
-    turtle.goto(-50, -200)
-    turtle.goto(0, 0)
-    turtle.end_fill()
-
-    turtle.left(angle)
-    turtle.pensize(25)
-    for i in ('red', 'green', 'blue', 'purple'):
-        turtle.color(i)
-        turtle.forward(a)
-        turtle.backward(a)
-        turtle.left(360 / 4)
-    turtle.update()
-    turtle.ontimer(flush, 100)
-
-
-def click(x, y):
-    global angle
-    angle += 5
-
-
-turtle.onscreenclick(click)
-
-flush()
-turtle.done()
+email = "00000111"
+decode = ''
+for i in range(0, len(email), 8):
+    bin_string = email[i:i + 8]
+    int_value = int(bin_string, 2)
+    char_value = chr(int_value)
+    decode += char_value
+print(decode)

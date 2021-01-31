@@ -7,6 +7,7 @@ R = 15
 ROLE_R = 20
 MOVE = 5
 JUMP = 40
+score = 0
 
 game_over = False
 
@@ -30,6 +31,8 @@ def collision():
         if (b[0] - role_coord[0]) ** 2 + (b[1] - role_coord[1]) ** 2 < (R + ROLE_R) ** 2:
             game_over = True
             break
+    if abs(role_coord[1]) >= HEIGHT / 2:
+        game_over = True
 
 
 def draw():
@@ -40,6 +43,8 @@ def draw():
         turtle.dot(R * 2)
     sprite.goto(role_coord)
     sprite.dot(ROLE_R * 2)
+    sprite.goto(-WIDTH / 2 + 50, HEIGHT / 2 - 60)
+    sprite.write(score, align='center', font=('Arial', 30))
     turtle.update()
 
 
@@ -51,11 +56,13 @@ def add():
 
 
 def remove():
-    global ball_coords
+    global ball_coords, score
     tmp = []
     for b in ball_coords:
         if not (b[0] < -WIDTH / 2 - R):
             tmp.append(b)
+        else:
+            score += 1
     ball_coords = tmp
 
 
@@ -73,8 +80,9 @@ def flush():
     draw()
     if not game_over:
         turtle.ontimer(flush, 50)
+
     else:
-        turtle.home()
+        sprite.home()
         sprite.write('Game Over', align='center', font=('Arial', 40))
 
 
