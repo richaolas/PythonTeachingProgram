@@ -73,7 +73,8 @@ def run():
     drawTree(6, 150)
     #petalPlace(160, -100, -150)
 
-tracer(0)
+speed(0)
+#tracer(0)
 run()
 update()
 done()
