@@ -9,7 +9,10 @@ lst = pygame.font.get_fonts()
 # print lst
 print(lst)
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
 font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 25)
+#default_font = pygame.font.get_default_font()
+#font = pygame.font.SysFont(default_font, 24)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

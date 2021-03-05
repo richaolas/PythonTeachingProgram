@@ -1,5 +1,5 @@
-import turtle
 import random
+import turtle
 
 turtle.hideturtle()
 turtle.tracer(False)
@@ -20,43 +20,50 @@ eaten = False
 game_over = False
 
 
+def knock(point, points):
+    x1, y1 = point['x'], point['y']
+    for p in points:
+        x2, y2 = p['x'], p['y']
+        if (x1 - x2) ** 2 + (y1 - y2) ** 2 < SIZE ** 2:
+            return True
+    return False
+
+
 def gen_bean_pos():
-    min_x = min(snake, key=lambda p: p['x'])['x'] - SIZE
-    max_x = max(snake, key=lambda p: p['x'])['x'] + SIZE
-    min_y = min(snake, key=lambda p: p['y'])['y'] - SIZE
-    max_y = max(snake, key=lambda p: p['y'])['y'] + SIZE
-
-    x = random.randint(-WIDTH // 2 + SIZE // 2, WIDTH // 2 - SIZE // 2)
-    y = random.randint(-HEIGHT // 2 + SIZE // 2, HEIGHT // 2 - SIZE // 2)
-
-    while min_x <= x <= max_x and min_y <= y <= max_y:
-        x = random.randint(-WIDTH // 2 + SIZE // 2, WIDTH // 2 - SIZE // 2)
-        y = random.randint(-HEIGHT // 2 + SIZE // 2, HEIGHT // 2 - SIZE // 2)
-
-    bean_pos[0], bean_pos[1] = x, y
+    # min_x = min(snake, key=lambda p: p['x'])['x'] - SIZE
+    # max_x = max(snake, key=lambda p: p['x'])['x'] + SIZE
+    # min_y = min(snake, key=lambda p: p['y'])['y'] - SIZE
+    # max_y = max(snake, key=lambda p: p['y'])['y'] + SIZE
+    found = False
+    W = int(WIDTH / 2 - SIZE / 2)
+    H = int(HEIGHT / 2 - SIZE / 2)
+    while not found:
+        x = random.randint(-W, W)
+        y = random.randint(-H, H)
+        if not knock({'x': x, 'y': y}, snake):
+            bean_pos[0], bean_pos[1] = x, y
+            found = True
 
 
 def can_eat():
-    head = snake[0]
-    return (head['x'] - bean_pos[0]) ** 2 + (head['y'] - bean_pos[1]) ** 2 < SIZE ** 2
+    return knock({'x': bean_pos[0], 'y': bean_pos[1]}, snake[0:1])
+    # head = snake[0]
+    # return (head['x'] - bean_pos[0]) ** 2 + (head['y'] - bean_pos[1]) ** 2 < SIZE ** 2
 
 
 def knock_wall():
     head = snake[0]
-    if head['x'] < -WIDTH / 2 + SIZE / 2 or head['x'] > WIDTH / 2 - SIZE / 2:
-        return True
-    if head['y'] < -HEIGHT / 2 + SIZE / 2 or head['y'] > HEIGHT / 2 - SIZE / 2:
-        return True
-    return False
+    return (abs(head['x']) > WIDTH / 2 - SIZE / 2) or (abs(head['y']) > HEIGHT / 2 - SIZE / 2)
 
 
 def knock_self():
-    head = snake[0]
-    for i in range(1, len(snake)):
-        body = snake[i]
-        if (head['x'] - body['x']) ** 2 + (head['y'] - body['y']) ** 2 < SIZE ** 2:
-            return True
-    return False
+    # head = snake[0]
+    # for i in range(1, len(snake)):
+    #     body = snake[i]
+    #     if (head['x'] - body['x']) ** 2 + (head['y'] - body['y']) ** 2 < SIZE ** 2:
+    #         return True
+    # return False
+    return knock(snake[0], snake[1:])
 
 
 ########################
