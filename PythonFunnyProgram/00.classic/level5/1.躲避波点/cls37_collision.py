@@ -11,7 +11,7 @@ score = 0
 
 game_over = False
 
-ball_coords = []
+balls = []
 role_coord = [0, 0]
 
 turtle.hideturtle()
@@ -27,7 +27,7 @@ turtle.tracer(False)
 
 def collision():
     global game_over
-    for b in ball_coords:
+    for b in balls:
         if (b[0] - role_coord[0]) ** 2 + (b[1] - role_coord[1]) ** 2 < (R + ROLE_R) ** 2:
             game_over = True
             break
@@ -38,7 +38,7 @@ def collision():
 def draw():
     turtle.clear()
     sprite.clear()
-    for ball in ball_coords:
+    for ball in balls:
         turtle.goto(ball[0], ball[1])
         turtle.dot(R * 2)
     sprite.goto(role_coord)
@@ -52,11 +52,11 @@ def add():
     if random.randint(1, 100) <= 10:
         ball_x = WIDTH / 2 - R
         ball_y = random.randint(-HEIGHT / 2 + R, HEIGHT / 2 - R)
-        ball_coords.append([ball_x, ball_y])
+        balls.append([ball_x, ball_y])
 
 
 def remove():
-    global ball_coords, score
+    global balls, score
     tmp = []
     for b in ball_coords:
         if not (b[0] < -WIDTH / 2 - R):
@@ -67,7 +67,7 @@ def remove():
 
 
 def update():
-    for b in ball_coords:
+    for b in balls:
         b[0] -= MOVE  # 波点横坐标减小
     role_coord[1] -= MOVE
     add()

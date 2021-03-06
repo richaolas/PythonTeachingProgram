@@ -18,14 +18,14 @@ size = width, height = 640, 480
 screen = pygame.display.set_mode(size)
 screen.fill([255, 255, 255])
 img_file = "beach_ball.png"
-ball_coords = []
+balls = []
 for row in range (0, 3):
     for column in range (0, 3):
         location = [column * 180 + 10, row * 180 + 10]
         ball = Ball(img_file, location)
-        ball_coords.append(ball)  # Adds balls to a list
+        balls.append(ball)  # Adds balls to a list
 
-for ball in ball_coords:
+for ball in balls:
     screen.blit(ball.image, ball.rect)
 pygame.display.flip()
 

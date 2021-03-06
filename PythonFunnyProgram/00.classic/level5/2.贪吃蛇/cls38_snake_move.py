@@ -1,96 +1,90 @@
 import turtle
-import random
 
-turtle.hideturtle()
-turtle.tracer(False)
-turtle.up()
-# turtle.colormode(255)
+'''
+In the class, we use map present the position 
+'''
 
-SPEED = 25
-SIZE = SPEED
-snake = []
-direction = {'x': 0, 'y': SPEED}
-
-########################
+'''
+global variable
+'''
 WIDTH = turtle.window_width()
 HEIGHT = turtle.window_height()
 
-bean_pos = [0, 0]
-eaten = False
-game_over = False
+R = 12
+SPEED_VALUE = R * 2
 
+snake = []
+speed = {'x': 0, 'y': SPEED_VALUE}
 
-########################
+'''
+functions
+'''
+
 
 def init():
+    turtle.tracer(False)
+    turtle.hideturtle()
+    turtle.penup()
+
+    turtle.onkeypress(up, 'Up')
+    turtle.onkeypress(down, 'Down')
+    turtle.onkeypress(left, 'Left')
+    turtle.onkeypress(right, 'Right')
+    turtle.listen()
+
     for i in range(5):
-        snake.append({'x': 0, 'y': -i * SIZE})
+        snake.append({'x': 0, 'y': -i * 2 * R})
 
 
 def right():
-    if direction['x'] == 0:
-        direction['x'] = SPEED
-        direction['y'] = 0
+    if speed['x'] == 0:
+        speed['x'] = SPEED_VALUE
+        speed['y'] = 0
 
 
 def left():
-    if direction['x'] == 0:
-        direction['x'] = -SPEED
-        direction['y'] = 0
+    if speed['x'] == 0:
+        speed['x'] = -SPEED_VALUE
+        speed['y'] = 0
 
 
 def up():
-    if direction['y'] == 0:
-        direction['x'] = 0
-        direction['y'] = SPEED
+    if speed['y'] == 0:
+        speed['x'] = 0
+        speed['y'] = SPEED_VALUE
 
 
 def down():
-    if direction['y'] == 0:
-        direction['x'] = 0
-        direction['y'] = -SPEED
+    if speed['y'] == 0:
+        speed['x'] = 0
+        speed['y'] = -SPEED_VALUE
 
 
 def update():
-    global eaten
-    global game_over
     # 增加一节
     head = snake[0].copy()
-    # print(id(head), id(snake[0]))
-    head['x'] += direction['x']
-    head['y'] += direction['y']
+    head['x'] += speed['x']
+    head['y'] += speed['y']
     snake.insert(0, head)
-    del snake[-1]
+    del snake[-1]  # or snake.pop(-1)
 
 
-def draw(color):
+def draw():
     turtle.clear()
-    # turtle.pencolor(color)  # 设置画笔颜色
-    # for s in snake:
-    #    turtle.goto(s['x'], s['y'])  # 移动画笔坐标
-    #    turtle.dot(SIZE)  # 绘制一节蛇
     for i, s in enumerate(snake):
         turtle.pencolor(i / len(snake), 0, 0)
         turtle.goto(s['x'], s['y'])  # 移动画笔坐标
-        turtle.dot(SIZE)  # 绘制一节蛇
+        turtle.dot(2 * R)  # 绘制一节蛇
+    turtle.update()
 
 
 def flush():
     update()
-    draw('red')
-    if not game_over:
-        turtle.ontimer(flush, 100)
-    else:
-        turtle.home()
-        turtle.write('Game Over', align='center', font=('Arial', 40))
+    draw()
+    turtle.ontimer(flush, 100)
 
 
 init()
 flush()
-turtle.onkeypress(up, 'Up')
-turtle.onkeypress(down, 'Down')
-turtle.onkeypress(left, 'Left')
-turtle.onkeypress(right, 'Right')
-turtle.listen()
 
 turtle.done()

@@ -1,3 +1,7 @@
+'''
+pygame 显示文字
+'''
+
 import pygame
 pygame.init()
 WIDTH = 600
