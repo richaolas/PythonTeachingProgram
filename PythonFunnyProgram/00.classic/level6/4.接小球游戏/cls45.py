@@ -5,6 +5,7 @@ import random
 import pygame
 
 pygame.init()
+FPS = 30
 WIDTH = 600
 HEIGHT = 500
 life = 3
@@ -53,11 +54,42 @@ def update(time):
 
     balls = tmp
 
+font_name = pygame.font.match_font('arial')
+def draw_text(surf, text, size, x, y):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, (255,255,255))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (x, y)
+    surf.blit(text_surface, text_rect)
+
+def show_go_screen():
+    screen.fill((0, 0, 0))
+    draw_text(screen, "Catch The Ball!", 64, WIDTH / 2, HEIGHT / 4)
+    draw_text(screen, "Using mouse to control the block", 22,
+              WIDTH / 2, HEIGHT / 2)
+    draw_text(screen, "Press a key to begin", 18, WIDTH / 2, HEIGHT * 3 / 4)
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYUP:
+                waiting = False
 
 clock = pygame.time.Clock()
 
 while True:
-    time_passed = clock.tick(30)
+
+    if life == 0:
+        show_go_screen()
+        life = 3
+        balls = []
+        board_x = (WIDTH - board_width) / 2
+
+
+    time_passed = clock.tick(FPS)
     time_passed_seconds = time_passed / 1000.0
     ticks = pygame.time.get_ticks()
 

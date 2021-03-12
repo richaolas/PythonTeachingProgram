@@ -89,7 +89,7 @@ while True:
             mouse_y = pos[1]
 
 
-    gen_ball(ticks, 3000)
+    gen_ball(ticks, 1000)
     update(time_passed_seconds)
 
     liftText = font.render("生命: {0}".format(life), True, (100, 200, 0))

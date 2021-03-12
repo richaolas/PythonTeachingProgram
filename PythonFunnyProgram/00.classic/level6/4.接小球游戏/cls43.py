@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 '''
 pygame 显示文字
 '''
 
 import pygame
+
 pygame.init()
 WIDTH = 600
 HEIGHT = 500
@@ -25,5 +27,5 @@ while True:
     liftText = font.render("生命: {0}".format(life), True, (100, 200, 0))
     scoreText = font.render("分数: {0}".format(score), True, (100, 200, 0))
     screen.blit(liftText, (padding, padding))
-    screen.blit(scoreText, (WIDTH-padding-scoreText.get_width(), padding))
+    screen.blit(scoreText, (WIDTH - padding - scoreText.get_width(), padding))
     pygame.display.update()
