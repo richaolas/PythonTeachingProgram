@@ -34,7 +34,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 font_name = pygame.font.match_font('arial')
 
 
-def draw_text(surf, text, size, x, y, color, align=0):
+def draw_text(surf, text, size, x, y, color=(255,255,255), align=0):
     font = pygame.font.Font(font_name, size)
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
@@ -69,7 +69,7 @@ while True:
 
     # 渲染文字
     draw_text(screen, "Life: {0}".format(life), 24, padding, padding, WHITE)
-    draw_text(screen, "Score: {0}".format(life), 24, WIDTH - padding, padding, WHITE, 1)
+    draw_text(screen, "Score: {0}".format(score), 24, WIDTH - padding, padding, WHITE, 1)
 
     # 渲染屏幕
     pygame.display.update()

@@ -1,9 +1,7 @@
 '''
-pygame 时间处理
+pygame 时间处理, 移动挡板
 '''
 
-import random
-import pygame
 
 '''
 规则1：小球从上方落下，无论接到或没接到都再次让小球从上方落下。
@@ -28,51 +26,89 @@ ticks = pygame.time.get_ticks() # 绝对时间
 
 '''
 
-pygame.init()
+import pygame
+import random
+
 WIDTH = 600
 HEIGHT = 500
+R = 20
+FPS = 30
+SPEED = 200
+
+# define colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+
+# game variable
 life = 3
 score = 0
 padding = 10
-lst = pygame.font.get_fonts()
-# print lst
-print(lst)
+
+# 初始化引擎
+pygame.init()
+
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 25)
+clock = pygame.time.Clock()
 
-mouse_x = WIDTH / 2
-mouse_y = 0
+# if using chinese
+# lst = pygame.font.get_fonts()
+# font = pygame.font.SysFont("microsoftyaheimicrosoftyaheiui", 25)
 
-board_width = 100
-borad_height = 30
-board_x = (WIDTH - board_width) / 2
+font_name = pygame.font.match_font('arial')
+
+
+def draw_text(surf, text, size, x, y, color=(255,255,255), align=0):
+    font = pygame.font.Font(font_name, size)
+    text_surface = font.render(text, True, color)
+    text_rect = text_surface.get_rect()
+    if align == 0:  # left align
+        text_rect.topleft = (x, y)
+    elif align == 1:  # right align
+        text_rect.topright = (x, y)
+    elif align == 2:  # mid align
+        text_rect.midtop = (x, y)
+
+    surf.blit(text_surface, text_rect)
+
+
+# ball = pygame.Surface((2 * R, 2 * R))
+# ball.fill(BLACK)
+# ball.set_colorkey(BLACK)
+# pygame.draw.circle(ball, RED, (R, R), R)
+# ball = ball.convert()
+# rect = ball.get_rect()
+# rect.midtop = (WIDTH / 2, 0)
+
+block_width, block_height = 100, 20
+block = pygame.Surface((block_width, block_height))
+block.fill((128, 60, 24))
+block_rect = block.get_rect()
+block_rect.midtop = (WIDTH/2, HEIGHT-block_height)
 
 balls = []
-R = 20
-SPEED = 200
+mouse_x, mouse_y = WIDTH/2, 0
 
 last_time = pygame.time.get_ticks()
 
 
-def gen_ball(current_time, rate=60):
+def gen_ball(current_time, rate=1000):
     global last_time
     if current_time > last_time + rate:
         last_time = current_time
         x = random.randint(R, WIDTH - R)
-        balls.append([x, 0])
+        y = -R
+        ball = pygame.Surface((2 * R, 2 * R))
+        ball.fill(BLACK)
+        ball.set_colorkey(BLACK)
+        pygame.draw.circle(ball, RED, (R, R), R)
+        ball = ball.convert()
+        rect = ball.get_rect()
+        rect.center = (x, y)
+        balls.append({'ball':ball, 'rect':rect})
 
-
-def update(time):
-    global balls
-    tmp = []
-    for pos in balls:
-        pos[1] += time * SPEED
-        if pos[1] < HEIGHT + R:
-            tmp.append(pos)
-    balls = tmp
-
-
-clock = pygame.time.Clock()
 
 while True:
     time_passed = clock.tick(30)
@@ -80,6 +116,7 @@ while True:
     ticks = pygame.time.get_ticks()
 
     for event in pygame.event.get():
+        #print(event)
         if event.type == pygame.QUIT:
             pygame.quit()
         elif event.type == pygame.MOUSEMOTION:
@@ -87,55 +124,24 @@ while True:
             pos = pygame.mouse.get_pos()
             mouse_x = pos[0]
             mouse_y = pos[1]
-
+    # 填充屏幕背景
+    screen.fill((0, 0, 0))
 
     gen_ball(ticks, 1000)
-    update(time_passed_seconds)
 
-    liftText = font.render("生命: {0}".format(life), True, (100, 200, 0))
-    scoreText = font.render("分数: {0}".format(score), True, (100, 200, 0))
+    for kv in balls:
+        #kv['rect'].y += 5                          # 这种方式，如果性能能达到>fps的所有机器，运行体验相似，但是性能较差的机器移动会变慢
+        kv['rect'].y += time_passed_seconds * SPEED # 这种方式，无论是否能达到fps，都能在不同电脑上相似的执行
+        screen.blit(kv['ball'], kv['rect'])
 
-    screen.fill((0, 0, 0))
-    screen.blit(liftText, (padding, padding))
-    screen.blit(scoreText, (WIDTH - padding - scoreText.get_width(), padding))
+    block_rect.x = max(0, min(WIDTH - block_width, mouse_x - block_width / 2))
+    screen.blit(block, block_rect)
+    
+    # 渲染文字
+    draw_text(screen, "Life: {0}".format(life), 24, padding, padding, WHITE)
+    draw_text(screen, "Score: {0}".format(score), 24, WIDTH - padding, padding, WHITE, 1)
 
-    for pos in balls:
-        pygame.draw.circle(screen, (255, 0, 0), (int(pos[0]), int(pos[1])), R)
-    board_x = max(0, min(WIDTH-board_width, mouse_x - board_width / 2))
-    pygame.draw.rect(screen, (200, 100, 30),
-                     (board_x, HEIGHT - borad_height, board_width, borad_height), 0)
-
+    # 渲染屏幕
     pygame.display.update()
 
-'''
-def update(self, current_time, rate=60):
-# #         if current_time > self.last_time + rate:
-# #             self.frame += 1
-# #             if self.frame > self.last_frame:
-# #                 self.frame = self.first_frame
-# #             self.last_time = current_time
-# #
-# #         if self.frame != self.old_frame:
-# #             frame_x = (self.frame % self.columns) * self.frame_width
-# #             frame_y = (self.frame // self.columns) * self.frame_height
-# #             rect = (frame_x, frame_y, self.frame_width, self.frame_height)
-# #             self.image = self.master_image.subsurface(rect)
-# #             self.old_frame = self.frame
-# #
-# #
-# # pygame.init()
-# # screen = pygame.display.set_mode((800, 600), 0, 32)
-# # pygame.display.set_caption("精灵类测试")
-# # font = pygame.font.Font(None, 18)
-# # framerate = pygame.time.Clock()
-# #
-# # cat = MySprite(screen)
-# # cat.load("sprite.png", 100, 100, 4)
-# # group = pygame.sprite.Group()
-# # group.add(cat)
-# #
-# # while True:
-# #     x = framerate.tick(30) # 相对时间
-# #     ticks = pygame.time.get_ticks() # 绝对时间
-
-'''
+# 有能力同学完成事件在屏幕显示程序

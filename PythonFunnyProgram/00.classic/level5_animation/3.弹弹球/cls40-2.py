@@ -1,12 +1,15 @@
 import turtle
 
-state = {1: 0, 2: 0}
-
-L = 100
-W = 20
-SPEED = 20
 WIDTH = turtle.window_width()
 HEIGHT = turtle.window_height()
+
+BOARD_LEN = 100
+BOARD_WIDTH = 20
+BOARD_SPEED = 20
+
+board_loc = [0, 0]  # left_board mid-y coordinate, right_board mid-y coordinate
+LEFT_BOARD = 0
+RIGHT_BOARD = 1
 
 left_pen, right_pen = None, None
 
@@ -26,44 +29,65 @@ def init():
     turtle.hideturtle()
     turtle.tracer(False)
     turtle.penup()
-    turtle.onkeypress(lambda: move(1, 20), 'w')
-    turtle.onkeypress(lambda: move(1, -20), 's')
-    turtle.onkeypress(lambda: move(2, 20), 'Up')
-    turtle.onkeypress(lambda: move(2, -20), 'Down')
+    turtle.onkeypress(lambda :board_move(LEFT_BOARD, BOARD_SPEED), 'w')
+    turtle.onkeypress(lambda :board_move(LEFT_BOARD, -BOARD_SPEED), 's')
+    turtle.onkeypress(lambda :board_move(RIGHT_BOARD, BOARD_SPEED), 'Up')
+    turtle.onkeypress(lambda :board_move(RIGHT_BOARD, -BOARD_SPEED), 'Down')
     turtle.listen()
 
 
-def move(player, change):
-    state[player] += change
+def board_move(board, dis):
+    board_loc[board] += dis
+
+
+# def left_board_up():
+#     board_loc[LEFT_BOARD] += BOARD_SPEED
+#
+#
+# def left_board_down():
+#     board_loc[LEFT_BOARD] += -BOARD_SPEED
+#
+#
+# def right_board_up():
+#     board_loc[RIGHT_BOARD] += BOARD_SPEED
+#
+#
+# def right_board_down():
+#     board_loc[RIGHT_BOARD] += -BOARD_SPEED
 
 
 def draw_board(pen, player):
     pen.clear()
-    if player == 1:
+    if player == LEFT_BOARD:
         lx = -WIDTH / 2
-    elif player == 2:
-        lx = WIDTH / 2 - W
-    ly = state[player] - L / 2
+    elif player == RIGHT_BOARD:
+        lx = WIDTH / 2 - BOARD_WIDTH
+    ly = board_loc[player] + BOARD_LEN / 2
     pen.penup()
     pen.goto(lx, ly)
     pen.pendown()
     pen.begin_fill()
     for i in range(2):
-        pen.forward(W)
+        pen.forward(BOARD_WIDTH)
         pen.right(90)
-        pen.forward(L)
+        pen.forward(BOARD_LEN)
         pen.right(90)
     pen.end_fill()
 
 
+def update():
+    pass
+
+
 def draw():
     # 绘制挡板
-    draw_board(left_pen, 1)
-    draw_board(right_pen, 2)
+    draw_board(left_pen, LEFT_BOARD)
+    draw_board(right_pen, RIGHT_BOARD)
     turtle.update()
 
 
 def flush():
+    update()
     draw()
     turtle.ontimer(flush, 100)
 
